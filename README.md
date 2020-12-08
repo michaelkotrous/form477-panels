@@ -5,7 +5,7 @@ This project assembles a nine-part panel dataset of [Form 477](https://www.fcc.g
 - Housing Density for U.S. block groups, and
 - Median Income for U.S. tracts.
 
-You may use this repo to recreate the dataset used by and replicate the econometric results of [Kotrous and Bailey (2020)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2607729). Due to insufficient RAM, we analyze a panel that samples 25 percent of U.S. Census tracts at random. My guess is you need at least 64 GB of RAM to load the full panel into Stata and execute the provided econometric tests. If you wish to work with the full panel, simply modify `master.do` to execute `append-full.do`, rather than `append-random.do`.
+You may use this repo to recreate the dataset used by and replicate the econometric results of [Kotrous and Bailey (2020)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2607729).
 
 ## License
 This project uses the MIT License, so you are free to copy and modify the code as it suits your research needs. The panel retains geographic identifiers for Census blocks, block groups, tracts, counties, and states, so joining additional demographic data should be fairly straightforward. I'm currently developing a project that joins [High-Cost Support data from USAC](https://opendata.usac.org/High-Cost/High-Cost-Connect-America-Fund-Broadband-Map-CAF-M/r59r-rpip) by Census block id, for example.
@@ -27,9 +27,14 @@ If you wish to see the final dataset or use it to run econometric tests, you can
 ## Using the Scripts
 Executing the scripts is quite simple. Simply open `master.do` in Stata, define the working directory on line 7, and execute the do file. There's no need to edit or modify the do files in the scripts directory. The master do file will execute the supporting scripts in the appropriate order. 
 
+## Changing the Sample, or Sample Size
+Due to insufficient RAM, Kotrous and Bailey (2020) analyzes a panel that samples 25 percent of U.S. Census tracts at random. The seed for replicating our sample is `5663451`. To draw a different sample of tracts, edit the seed on line 35 of `scripts/append-random.do`.
+
+To change the sample size to something other than 25 percent, edit line 36 of `scripts/append-random.do`. If you wish to work with the full panel (i.e., 100 percent of observations), instead modify `master.do` to execute `append-full.do`, rather than `append-random.do`. My guess is that you need at least 64 GB of RAM to load the full panel into Stata and execute the provided econometric tests.
+
 ## Supporting the Project
 Collecting the data took considerable effort, and storing the source files and allowing you to retrieve them is not free. If you use or enjoy this repository, I would appreciate you [buying me a beer](https://paypal.me/michaelkotrous)! 🍺
 
-I would love to hear from you if you publish any research that uses or was inspired by this repository! If you do so, please cite: 
+I would love to hear from you if you publish any research that uses or was inspired by this repository! If you do so, please cite this repository and:
 
 Kotrous, Michael and James B. Bailey. "Broadband Speeds in Fibered Markets: An Empirical Analysis." Paper presented at _2021 TPRC/48th Research Conference on Communication, Information and Internet Policy_, December 4, 2020. [http://dx.doi.org/10.2139/ssrn.2607729](http://dx.doi.org/10.2139/ssrn.2607729).
