@@ -32,6 +32,16 @@ Due to insufficient RAM, Kotrous and Bailey (2020) analyzes a panel that samples
 
 To change the sample size to something other than 25 percent, edit line 36 of `scripts/append-random.do`. If you wish to work with the full panel (i.e., 100 percent of observations), instead modify `master.do` to execute `append-full.do`, rather than `append-random.do`. My guess is that you need at least 64 GB of RAM to load the full panel into Stata and execute the provided econometric tests.
 
+## Final Outputs
+When the full `master.do` script is executed, four files will be placed in your working directory.
+
+- US-Fixed-Panel-Random-Merged.dta (default, or US-Fixed-Panel-Merged.dta if `append-full.do` script is executed in master file instead of `append-random.do`)
+- broadbandcompetition-panel.log (Stata log with full econometric results)
+- regression-tables.rtf (Word-friendly format for regression tables)
+- regression-tables.tex (LaTeX file for regression tables)
+
+You will also notice that the `crosssection` directory is populated with Stata dta files for each merged cross-section of Form 477/ACS data, as well as various Stata log files with merger summaries and the like.
+
 ## Supporting the Project
 Collecting the data took considerable effort, and storing the source files and allowing you to retrieve them is not free. If you use or enjoy this repository, I would appreciate you [buying me a beer](https://paypal.me/michaelkotrous)! 🍺
 
