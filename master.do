@@ -24,8 +24,8 @@ do scripts/crosssection-201806
 do scripts/crosssection-201812
 
 /* Append cross-sections to make full panel */
-do scripts/append-random
-//do scripts/append-full
+//do scripts/append-random
+do scripts/append-full
 
 /* Run econometric tests */
 do scripts/broadbandcompetition-panel
