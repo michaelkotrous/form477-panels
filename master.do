@@ -12,7 +12,7 @@ global states AL AZ AR CA CO CT DE DC FL GA ID IL IN IA KS KY LA ME MD MA MI MN 
 /* Produce dta files to be used for mergers in annual dataset files */
 do scripts/shared-data
 
-/* Assemble cross-sections for years 2014-2017 */
+/* Assemble cross-sections for years 2014-2018 */
 do scripts/crosssection-201412
 do scripts/crosssection-201506
 do scripts/crosssection-201512
