@@ -6,11 +6,7 @@ order consumer, before(techcode)
 order blockid, before(blkgrpid)
 order stateabbr month year, after(stateid)
 order housing_density popln_density medianincome_tract_2018 medianincome_tract_moe_2018, before(totalpopulation_blkgrp)
-order count_aDSL binary_aDSL binary_aDSL1 binary_aDSL2 binary_aDSL3 count_cable binary_cable binary_cable1 binary_cable2 binary_cable3 count_fiber fiber_gigabit count_fiberGigabit binary_fiberGigabit binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 fiber_nongigabit count_fiberNonGigabit binary_fiberNonGigabit binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3, after(maxadup)
-
-
-/* DESCRIBE FULL DATASET */
-label data "FCC Form 477 Fixed Broadband Data, 2014-2018 from 25 percent of US Census Tracts"
+order count_aDSL binary_aDSL binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 count_cable binary_cable binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 count_fiber fiber_gigabit count_fiberGigabit binary_fiberGigabit binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 fiber_nongigabit count_fiberNonGigabit binary_fiberNonGigabit binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5, after(maxadup)
 
 /* LABEL VARIABLES AND VALUES, WHERE APPLICABLE */
 label variable logrecno "Logical record number relating broadband deployment tables to Imputations Table"
@@ -46,9 +42,13 @@ label variable binary_aDSL2 "Two aDSL providers in block"
 label define binary_aDSL2_vals 0 "No" 1 "Yes"
 label values binary_aDSL2 binary_aDSL2_vals
 
-label variable binary_aDSL3 "Three or more aDSL providers in block"
+label variable binary_aDSL3 "Three aDSL providers in block"
 label define binary_aDSL3_vals 0 "No" 1 "Yes"
 label values binary_aDSL3 binary_aDSL3_vals
+
+label variable binary_aDSL4 "Four aDSL providers in block"
+label define binary_aDSL4_vals 0 "No" 1 "Yes"
+label values binary_aDSL4 binary_aDSL4_vals
 
 label variable binary_cable "Cable provider (one or more) in block"
 label define binary_cable_vals 0 "No" 1 "Yes"
@@ -62,9 +62,17 @@ label variable binary_cable2 "Two cable providers in block"
 label define binary_cable2_vals 0 "No" 1 "Yes"
 label values binary_cable2 binary_cable2_vals
 
-label variable binary_cable3 "Three or more cable providers in block"
+label variable binary_cable3 "Three cable providers in block"
 label define binary_cable3_vals 0 "No" 1 "Yes"
 label values binary_cable3 binary_cable3_vals
+
+label variable binary_cable4 "Four cable providers in block"
+label define binary_cable4_vals 0 "No" 1 "Yes"
+label values binary_cable4 binary_cable4_vals
+
+label variable binary_cable5 "Five cable providers in block"
+label define binary_cable5_vals 0 "No" 1 "Yes"
+label values binary_cable5 binary_cable5_vals
 
 label variable binary_fiberGigabit "Fiber Gb provider (one or more) in block"
 label define binary_fiberGigabit_vals 0 "No" 1 "Yes"
@@ -78,9 +86,13 @@ label variable binary_fiberGigabit2 "Two fiber Gb providers in block"
 label define binary_fiberGigabit2_vals 0 "No" 1 "Yes"
 label values binary_fiberGigabit2 binary_fiberGigabit2_vals
 
-label variable binary_fiberGigabit3 "Three or more fiber Gb providers in block"
+label variable binary_fiberGigabit3 "Three fiber Gb providers in block"
 label define binary_fiberGigabit3_vals 0 "No" 1 "Yes"
 label values binary_fiberGigabit3 binary_fiberGigabit3_vals
+
+label variable binary_fiberGigabit4 "Four fiber Gb providers in block"
+label define binary_fiberGigabit4_vals 0 "No" 1 "Yes"
+label values binary_fiberGigabit4 binary_fiberGigabit4_vals
 
 label variable binary_fiberNonGigabit "Fiber ltGb provider (one or more) in block"
 label define binary_fiberNonGigabit_vals 0 "No" 1 "Yes"
@@ -94,9 +106,17 @@ label variable binary_fiberNonGigabit2 "Two fiber ltGb providers in block"
 label define binary_fiberNonGigabit2_vals 0 "No" 1 "Yes"
 label values binary_fiberNonGigabit2 binary_fiberNonGigabit2_vals
 
-label variable binary_fiberNonGigabit3 "Three or more fiber ltGb providers in block"
+label variable binary_fiberNonGigabit3 "Three fiber ltGb providers in block"
 label define binary_fiberNonGigabit3_vals 0 "No" 1 "Yes"
 label values binary_fiberNonGigabit3 binary_fiberNonGigabit3_vals
+
+label variable binary_fiberNonGigabit4 "Four fiber ltGb providers in block"
+label define binary_fiberNonGigabit4_vals 0 "No" 1 "Yes"
+label values binary_fiberNonGigabit4 binary_fiberNonGigabit4_vals
+
+label variable binary_fiberNonGigabit5 "Five fiber ltGb providers in block"
+label define binary_fiberNonGigabit5_vals 0 "No" 1 "Yes"
+label values binary_fiberNonGigabit5 binary_fiberNonGigabit5_vals
 
 label variable fiber_gigabit "Fiber gigabit service"
 label define fiber_gigabit_vals 0 "No" 1 "Yes"

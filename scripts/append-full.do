@@ -10,5 +10,9 @@ append using crosssection/US-Fixed-Merged-201506 crosssection/US-Fixed-Merged-20
 /* FORMAT DATASET BY SORTING, ORDERING, AND LABELING */
 do scripts/helpers/dataset-formatting
 
+
+/* DESCRIBE DATASET */
+label data "FCC Form 477 Fixed Broadband Data, 2014-2018"
+
 save US-Fixed-Panel-Merged, replace
 clear

@@ -116,5 +116,9 @@ drop _merge_population _merge_housingunits _merge_landarea _merge_medianincome _
 /* FORMAT DATASET BY SORTING, ORDERING, AND LABELING */
 do scripts/helpers/dataset-formatting
 
+
+/* DESCRIBE DATASET */
+label data "FCC Form 477 Fixed Broadband Data, 2014-2018 from 25 percent of US Census Tracts"
+
 save US-Fixed-Panel-Random-Merged, replace
 clear
