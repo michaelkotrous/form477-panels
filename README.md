@@ -28,19 +28,26 @@ If you wish to see the final dataset or use it to run econometric tests, you can
 Executing the scripts is quite simple. Simply open `master.do` in Stata, define the working directory on line 7, and execute the do file. There's no need to edit or modify the do files in the scripts directory. The master do file will execute the supporting scripts in the appropriate order. 
 
 ## Changing the Sample, or Sample Size
-Due to insufficient RAM, Kotrous and Bailey (2020) analyzes a panel that samples 25 percent of U.S. Census tracts at random. The seed for replicating our sample is `5663451`. To draw a different sample of tracts, edit the seed on line 35 of `scripts/append-random.do`.
+Assembling the full national panel for all U.S. Census tracts in the 48 contiguous U.S. states and Washington, D.C. requires at least 64 GB of RAM. The full national panel is over 32 GB in size.
 
-To change the sample size to something other than 25 percent, edit line 36 of `scripts/append-random.do`. If you wish to work with the full panel (i.e., 100 percent of observations), instead modify `master.do` to execute `append-full.do`, rather than `append-random.do`. My guess is that you need at least 64 GB of RAM to load the full panel into Stata and execute the provided econometric tests.
+If you have insufficient RAM to work with the full national panel, you can select a sample by randomly drawing a given percentage of U.S. census tracts. Modify `master.do` to execute `append-random.do` rather than `append-full.do`. You will also need to edit line 10 of `scripts/broadbandcompetition-panel.do` to use the dataset US-Fixed-Panel-Random-Merged.dta.
+
+By default, `scripts/append-random.do` will sample 25 percent of U.S. census tracts. Edit line 36 of `scripts/append-random.do` to change the sample size. 
+
+You can define the seed to allow for replication of a sample on line 35 of `scripts/append-random.do`. The seed is set to `5663451`.
 
 ## Final Outputs
 When the full `master.do` script is executed, four files will be placed in your working directory.
 
-- US-Fixed-Panel-Random-Merged.dta (default, or US-Fixed-Panel-Merged.dta if `append-full.do` script is executed in master file instead of `append-random.do`)
+- US-Fixed-Panel-Merged.dta (default, or US-Fixed-Panel-Random-Merged.dta if `append-random.do` script is executed in master file instead of `append-full.do`)
 - broadbandcompetition-panel.log (Stata log with full econometric results)
 - regression-tables.rtf (Word-friendly format for regression tables)
 - regression-tables.tex (LaTeX file for regression tables)
 
 You will also notice that the `crosssection` directory is populated with Stata dta files for each merged cross-section of Form 477/ACS data, as well as various Stata log files with merger summaries and the like.
+
+## Replicating Research
+Kotrous and Bailey (2020) analyzes a panel that samples 25 percent of U.S. Census tracts at random. The seed for replicating that sample is `5663451`. To draw a different sample of tracts, edit the seed on line 35 of `scripts/append-random.do`.
 
 ## Supporting the Project
 Collecting the data took considerable effort, and storing the source files and allowing you to retrieve them is not free. If you use or enjoy this repository, I would appreciate you [buying me a beer](https://paypal.me/michaelkotrous)! 🍺

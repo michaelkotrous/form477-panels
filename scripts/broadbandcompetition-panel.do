@@ -7,7 +7,7 @@
 
 log using broadbandcompetition-panel.log, replace
 
-use US-Fixed-Panel-Random-Merged, clear
+use US-Fixed-Panel-Merged, clear
 
 
 /* ------------------- 
