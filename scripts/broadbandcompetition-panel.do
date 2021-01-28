@@ -26,7 +26,7 @@ tab count_aDSL
 tab count_cable
 tab count_fiber
 
-use US-Fixed-Panel-Random-Merged, clear
+use US-Fixed-Panel-Merged, clear
 
 
 /* ------------------- 
@@ -44,7 +44,7 @@ collapse (max) count_cable count_fiber, by(blockid)
 tab count_cable
 tab count_fiber
 
-use US-Fixed-Panel-Random-Merged, clear
+use US-Fixed-Panel-Merged, clear
 
 // Cable, by year-month
 keep if inlist(techcode, 40, 41, 42, 43)
@@ -57,7 +57,7 @@ collapse (max) count_aDSL count_fiber, by(blockid)
 tab count_aDSL
 tab count_fiber
 
-use US-Fixed-Panel-Random-Merged, clear
+use US-Fixed-Panel-Merged, clear
 
 // Fiber, by year-month
 keep if techcode == 50
@@ -70,7 +70,7 @@ collapse (max) count_aDSL count_cable, by(blockid)
 tab count_aDSL
 tab count_cable
 
-use US-Fixed-Panel-Random-Merged, clear
+use US-Fixed-Panel-Merged, clear
 
 
 /* -------------------
