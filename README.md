@@ -5,7 +5,7 @@ This project assembles an eleven-part panel dataset of [Form 477](https://www.fc
 - Housing Density for U.S. block groups, and
 - Median Income for U.S. tracts.
 
-This version of the repo extends and expands the panel dataset used in the working paper versions of [Kotrous and Bailey (2021)](https://www.thecgo.org/research/broadband-speeds-in-fibered-markets-an-empirical-analysis/). A [previous release](https://github.com/michaelkotrous/form477-panels/tree/v1.0.0) of this repo can be used to recreate the dataset used by and replicate the econometric results of [Kotrous and Bailey (2021)](https://www.thecgo.org/research/broadband-speeds-in-fibered-markets-an-empirical-analysis/).
+This version of the repo extends and expands the panel dataset used in the working paper versions of [Kotrous and Bailey (2021)](https://www.thecgo.org/research/broadband-speeds-in-fibered-markets-an-empirical-analysis/). A [previous release](https://github.com/michaelkotrous/form477-panels/tree/v.1.0.1) of this repo can be used to recreate the dataset used by and replicate the econometric results of [Kotrous and Bailey (2021)](https://www.thecgo.org/research/broadband-speeds-in-fibered-markets-an-empirical-analysis/).
 
 ## License
 This project uses the MIT License, so you are free to copy and modify the code as it suits your research needs. The panel retains geographic identifiers for Census blocks, block groups, tracts, counties, and states, so joining additional demographic data should be fairly straightforward. I'm currently developing a project that joins [High-Cost Support data from USAC](https://opendata.usac.org/High-Cost/High-Cost-Connect-America-Fund-Broadband-Map-CAF-M/r59r-rpip) by Census block id, for example.
@@ -47,7 +47,7 @@ When the full `master.do` script is executed, four files will be placed in your 
 You will also notice that the `crosssection` directory is populated with Stata dta files for each merged cross-section of Form 477/ACS data, as well as various Stata log files with merger summaries and the like.
 
 ## Replicating Research
-[Kotrous and Bailey (2021)](https://www.thecgo.org/research/broadband-speeds-in-fibered-markets-an-empirical-analysis/) analyzes a panel for 2014 - 2018 that samples 25 percent of U.S. Census tracts at random. A [previous release](https://github.com/michaelkotrous/form477-panels/tree/v1.0.0) of this repo provides the version of code, and links to archives of the source files, used for that paper.
+[Kotrous and Bailey (2021)](https://www.thecgo.org/research/broadband-speeds-in-fibered-markets-an-empirical-analysis/) analyzes a panel for 2014 - 2018 that samples 25 percent of U.S. Census tracts at random. A [previous release](https://github.com/michaelkotrous/form477-panels/tree/v.1.0.1) of this repo provides the version of code, and links to archives of the source files, used for that paper.
 
 The seed for replicating that sample is `5663451`. To draw a different sample of tracts, edit the seed on line 35 of `scripts/append-random.do`.
 
