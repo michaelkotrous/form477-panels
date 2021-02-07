@@ -20,7 +20,7 @@ In the repo working directory, create two new directories: crosssection (note th
 
 **crosssection**: This directory is used to store each of the nine cross-sections of Form 477 data that has been joined with Census data. You are okay to leave this directory empty. It will be populated with files as the Stata scripts execute.
 
-**source**: This directory is used to store all source files (in csv format) from FCC, the U.S. Census Bureau, and U.S. Bureau of Labor Statistics. This directory must be populated with source files in order to work. You can download an archive ([.zip](); [.tar.gz]()) of the source files. These files require just under **40** GB of storage. Note that when you extract the source files, the directory structure in your local environment (relative to the repo working directory) should look like `source/2014`, `source/2015`, and so on.
+**source**: This directory is used to store all source files (in csv format) from FCC, the U.S. Census Bureau, and U.S. Bureau of Labor Statistics. This directory must be populated with source files in order to work. You can download an archive ([.zip](https://form477-panels.s3.us-east-2.amazonaws.com/form477-panels-1.1.x.zip); [.tar.gz](https://form477-panels.s3.us-east-2.amazonaws.com/form477-panels-1.1.x.tar.gz)) of the source files. These files require just under 50 GB of storage. Note that when you extract the source files, the directory structure in your local environment (relative to the repo working directory) should look like `source/2014`, `source/2015`, and so on.
 
 If you wish to see the final dataset or use it to run econometric tests, you can [download the final dataset](https://form477-panels.s3.us-east-2.amazonaws.com/US-Fixed-Panel-Merged-1.1.x.dta) (~40 GB). This dataset includes observations for all U.S. Census tracts in the 48 contiguous states and Washington, D.C.
 
@@ -30,7 +30,7 @@ Executing the scripts is quite simple. Simply open `master.do` in Stata, define 
 ## Changing the Sample, or Sample Size
 Assembling the full national panel for all U.S. Census tracts in the 48 contiguous U.S. states and Washington, D.C. requires at least 64 GB of RAM. The full national panel is about 40 GB in size.
 
-If you have insufficient RAM to work with the full national panel, you can select a sample by randomly drawing a given percentage of U.S. census tracts. Modify `master.do` to execute `append-random.do` rather than `append-full.do`. You will also need to edit lines 10,  of `scripts/broadbandcompetition-panel.do` to use the dataset US-Fixed-Panel-Random-Merged.dta.
+If you have insufficient RAM to work with the full national panel, you can select a sample by randomly drawing a given percentage of U.S. census tracts. Modify `master.do` to execute `append-random.do` rather than `append-full.do`. You will also need to edit lines 10, 29, 47, 60, and 73 of `scripts/broadbandcompetition-panel.do` to use the dataset US-Fixed-Panel-Random-Merged.dta.
 
 By default, `scripts/append-random.do` will sample 25 percent of U.S. census tracts. Edit line 36 of `scripts/append-random.do` to change the sample size. 
 
