@@ -1,16 +1,16 @@
-/* Produce June 2018 dataset with
-** - ACS, block group landarea merged into June 2018 FCC Form 477 dataset,
+/* Produce June 2019 dataset with
+** - ACS, block group landarea merged into June 2019 FCC Form 477 dataset,
 ** - Housing and Population Density values, and
 ** - Competition metrics 
 **
 ** Outputs:
-** - crosssection/US-Fixed-Merged-201806.dta
-** - crosssection/merge-source-201806.log
-** - crosssection/merge-competition-vars-201806.log */
+** - crosssection/US-Fixed-Merged-201906.dta
+** - crosssection/merge-source-201906.log
+** - crosssection/merge-competition-vars-201906.log */
 
-global year 2018
-global yearabbr 18
-global yyyymm 201806
+global year 2019
+global yearabbr 19
+global yyyymm 201906
 
 /* -------------------
  ** ACS B01003
@@ -64,8 +64,8 @@ clear
  ** FCC FORM 477
  * ------------------- */
 
-/* JUNE 2018 */
-import delimited source/2018/fcc477/US-FIXED-JUN2018-v1, clear
+/* JUNE 2019 */
+import delimited source/2019/fcc477/US-FIXED-JUN2019-v2, clear
 
 // Drop states and territories outside 48 contiguous US states and DC
 drop if stateabbr == "AK" | stateabbr == "AS" | stateabbr == "GU" | stateabbr == "HI" | stateabbr == "MP" | stateabbr == "PR" | stateabbr == "VI"
@@ -80,11 +80,12 @@ drop if maxaddown < 25 | maxadup < 3
 drop dbaname holdingcompanyname hoconum hocofinal business maxcirdown maxcirup
 
 // Generate dates for panel
-generate month = date("06/30/2018", "MDY")
-generate year = date("2018", "Y")
+generate month = date("06/30/2019", "MDY")
+generate year = date("2019", "Y")
 
 // Clean formats to make variables consistent across 477 data files
 format maxaddown %9.0g
+format maxadup %9.0g
 
 /* FORMAT FCC FORM 477 DATA */
 // Change format of month and year
@@ -108,7 +109,7 @@ generate stateid = substr(blockid, 1, 2)
 
 
 /* -------------------
- ** PRODUCE FULL JUN 2018 FCC, ACS DATA 
+ ** PRODUCE FULL JUN 2019 FCC, ACS DATA 
  * ------------------- */
 
 /* MERGE ACS, BLOCK GROUP LANDAREA INTO FCC FORM 477 DATA */

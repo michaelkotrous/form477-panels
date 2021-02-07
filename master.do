@@ -1,6 +1,6 @@
 /* -------------------
  ** FCC FORM 477 PANEL
- ** UNITED STATES, 2014-2018
+ ** UNITED STATES, 2014-2019
  * ------------------- */
 
 set more off
@@ -22,6 +22,8 @@ do scripts/crosssection-201706
 do scripts/crosssection-201712
 do scripts/crosssection-201806
 do scripts/crosssection-201812
+do scripts/crosssection-201906
+do scripts/crosssection-201912
 
 /* Append cross-sections to make full panel */
 //do scripts/append-random

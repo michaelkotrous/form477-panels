@@ -5,7 +5,7 @@ sort blockid month frn techcode
 order consumer, before(techcode)
 order blockid, before(blkgrpid)
 order stateabbr month year, after(stateid)
-order housing_density popln_density medianincome_tract_2018 medianincome_tract_moe_2018, before(totalpopulation_blkgrp)
+order housing_density popln_density medianincome_tract_2019 medianincome_tract_moe_2019, before(totalpopulation_blkgrp)
 order count_aDSL binary_aDSL binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 count_cable binary_cable binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 count_fiber fiber_gigabit count_fiberGigabit binary_fiberGigabit binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 fiber_nongigabit count_fiberNonGigabit binary_fiberNonGigabit binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5, after(maxadup)
 
 /* LABEL VARIABLES AND VALUES, WHERE APPLICABLE */
@@ -136,8 +136,8 @@ label variable month "Month"
 label variable year "Year"
 label variable housing_density "Housing Density"
 label variable popln_density "Population Density"
-label variable medianincome_tract_2018 "Median Income"
-label variable medianincome_tract_moe_2018 "Median Income - Margin of Error"
+label variable medianincome_tract_2019 "Median Income"
+label variable medianincome_tract_moe_2019 "Median Income - Margin of Error"
 label variable totalpopulation_blkgrp "Total Population"
 label variable totalpopulation_blkgrp_moe "Total Population - Margin of Error"
 label variable housingunits_blkgrp "Housing Units"

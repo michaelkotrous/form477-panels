@@ -84,7 +84,7 @@ gen ln_maxaddown_kbps = ln(maxaddown_kbps)
 drop maxaddown_kbps
 
 // Take logs of income, housing and population density
-gen ln_medianincome_tract_2018 = ln(medianincome_tract_2018)
+gen ln_medianincome_tract_2019 = ln(medianincome_tract_2019)
 gen ln_housing_density = ln(housing_density)
 gen ln_popln_density = ln(popln_density)
 
@@ -94,7 +94,7 @@ gen ln_popln_density = ln(popln_density)
  * ------------------- */
 
 label variable ln_maxaddown_kbps "ln(Download Speed, kbps)"
-label variable ln_medianincome_tract_2018 "ln(Median Income)"
+label variable ln_medianincome_tract_2019 "ln(Median Income)"
 label variable ln_housing_density "ln(Housing Density)"
 label variable ln_popln_density "ln(Population Density)"
 
@@ -106,7 +106,7 @@ label variable ln_popln_density "ln(Population Density)"
 /* Describe dataset */
 describe
 labelbook
-codebook ln_maxaddown_kbps count_fiberGigabit count_fiberNonGigabit count_cable count_aDSL ln_medianincome_tract_2018 ln_housing_density ln_popln_density month stateabbr stateid countyid tractid blkgrpid blockid, header
+codebook ln_maxaddown_kbps count_fiberGigabit count_fiberNonGigabit count_cable count_aDSL ln_medianincome_tract_2019 ln_housing_density ln_popln_density month stateabbr stateid countyid tractid blkgrpid blockid, header
 
 /* Show values and count observations for tech and speeds */ 
 tab techcode
@@ -145,7 +145,7 @@ tab maxaddown count_fiberGigabit if techcode == 50
 tab maxaddown count_fiberNonGigabit if techcode == 50
 
 /* Summarize controls */
-sum medianincome_tract_2018 ln_medianincome_tract_2018
+sum medianincome_tract_2019 ln_medianincome_tract_2019
 sum housing_density popln_density ln_housing_density ln_popln_density
 
 
@@ -155,59 +155,59 @@ sum housing_density popln_density ln_housing_density ln_popln_density
 
 /* HOUSING DENSITY */
 // Simple OLS (est1)
-eststo: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_housing_density if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_housing_density if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "No", replace
 
 // State Fixed Effects (est2)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_housing_density i.stateabbr if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_housing_density i.stateabbr if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "No", replace
 
 // Time Fixed Effects (est3)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_housing_density i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_housing_density i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "Yes", replace
 
 // State & Time Fixed Effects (est4)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_housing_density i.stateabbr i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_housing_density i.stateabbr i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "Yes", replace
 
-summarize ln_maxaddown_kbps ln_medianincome_tract_2018 ln_housing_density if e(sample)
+summarize ln_maxaddown_kbps ln_medianincome_tract_2019 ln_housing_density if e(sample)
 
 
 /* POPULATION DENSITY */
 // Simple OLS (est5)
-eststo: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_popln_density if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_popln_density if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "No", replace
 
 // State Fixed Effects (est6)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_popln_density i.stateabbr if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_popln_density i.stateabbr if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "No", replace
 
 // Time Fixed Effects (est7)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_popln_density i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_popln_density i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "Yes", replace
 
 // State & Time Fixed Effects (est8)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_popln_density i.stateabbr i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_popln_density i.stateabbr i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "Yes", replace
 
-summarize ln_maxaddown_kbps ln_medianincome_tract_2018 ln_popln_density if e(sample)
+summarize ln_maxaddown_kbps ln_medianincome_tract_2019 ln_popln_density if e(sample)
 
 tab1 binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 if e(sample)
 
 
 /* TABLE: aDSL Service, Competition Count Specifications */
 // Export results of all aDSL regressions in RTF and Tex formats
-esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.rtf, title("Table: aDSL Service, Competition Count Dummies") keep(binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) replace
+esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.rtf, title("Table: aDSL Service, Competition Count Dummies") keep(binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) replace
 
-esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.tex, title("Table: aDSL Service, Competition Count Dummies") keep(binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) replace
+esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.tex, title("Table: aDSL Service, Competition Count Dummies") keep(binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable1 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) replace
 
 eststo clear
 
@@ -218,59 +218,59 @@ eststo clear
 
 /* HOUSING DENSITY */
 // Simple OLS (est1)
-eststo: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_housing_density if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_housing_density if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "No", replace
 
 // State Fixed Effects (est2)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_housing_density i.stateabbr if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_housing_density i.stateabbr if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "No", replace
 
 // Time Fixed Effects (est3)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_housing_density i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_housing_density i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "Yes", replace
 
 // State & Time Fixed Effects (est4)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_housing_density i.stateabbr i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_housing_density i.stateabbr i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "Yes", replace
 
-summarize ln_maxaddown_kbps ln_medianincome_tract_2018 ln_housing_density if e(sample)
+summarize ln_maxaddown_kbps ln_medianincome_tract_2019 ln_housing_density if e(sample)
 
 
 /* POPULATION DENSITY */
 // Simple OLS (est5)
-eststo: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_popln_density if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_popln_density if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "No", replace
 
 // State Fixed Effects (est6)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_popln_density i.stateabbr if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_popln_density i.stateabbr if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "No", replace
 
 // Time Fixed Effects (est7)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_popln_density i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_popln_density i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "Yes", replace
 
 // State & Time Fixed Effects (est8)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_popln_density i.stateabbr i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_popln_density i.stateabbr i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "Yes", replace
 
-summarize ln_maxaddown_kbps ln_medianincome_tract_2018 ln_popln_density if e(sample)
+summarize ln_maxaddown_kbps ln_medianincome_tract_2019 ln_popln_density if e(sample)
 
 tab1 binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 if e(sample)
 
 
 /* TABLE: Cable Service, Competition Count Specifications */
 // Export results of all cable regressions in RTF and Tex formats
-esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.rtf, title("Table: Cable Service, Competition Count Dummies") keep(binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) append
+esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.rtf, title("Table: Cable Service, Competition Count Dummies") keep(binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) append
 
-esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.tex, title("Table: Cable Service, Competition Count Dummies") keep(binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2018 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) append
+esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.tex, title("Table: Cable Service, Competition Count Dummies") keep(binary_fiberGigabit1 binary_fiberGigabit2 binary_fiberGigabit3 binary_fiberGigabit4 binary_fiberNonGigabit1 binary_fiberNonGigabit2 binary_fiberNonGigabit3 binary_fiberNonGigabit4 binary_fiberNonGigabit5 binary_aDSL1 binary_aDSL2 binary_aDSL3 binary_aDSL4 binary_cable2 binary_cable3 binary_cable4 binary_cable5 ln_medianincome_tract_2019 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) append
 
 eststo clear
 
@@ -281,59 +281,59 @@ eststo clear
 
 /* HOUSING DENSITY */
 // Simple OLS (est1)
-eststo: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2018 ln_housing_density if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2019 ln_housing_density if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "No", replace
 
 // State Fixed Effects (est2)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2018 ln_housing_density i.stateabbr if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2019 ln_housing_density i.stateabbr if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "No", replace
 
 // Time Fixed Effects (est3)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2018 ln_housing_density i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2019 ln_housing_density i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "Yes", replace
 
 // State & Time Fixed Effects (est4)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2018 ln_housing_density i.stateabbr i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2019 ln_housing_density i.stateabbr i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "Yes", replace
 
-summarize ln_maxaddown_kbps ln_medianincome_tract_2018 ln_housing_density if e(sample)
+summarize ln_maxaddown_kbps ln_medianincome_tract_2019 ln_housing_density if e(sample)
 
 
 /* POPULATION DENSITY */
 // Simple OLS (est5)
-eststo: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2018 ln_popln_density if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2019 ln_popln_density if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "No", replace
 
 // State Fixed Effects (est6)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2018 ln_popln_density i.stateabbr if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2019 ln_popln_density i.stateabbr if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "No", replace
 
 // Time Fixed Effects (est7)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2018 ln_popln_density i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2019 ln_popln_density i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "Yes", replace
 
 // State & Time Fixed Effects (est8)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2018 ln_popln_density i.stateabbr i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2019 ln_popln_density i.stateabbr i.month if inlist(techcode, 10, 11, 12), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "Yes", replace
 
-summarize ln_maxaddown_kbps ln_medianincome_tract_2018 ln_popln_density if e(sample)
+summarize ln_maxaddown_kbps ln_medianincome_tract_2019 ln_popln_density if e(sample)
 
 tab1 binary_fiberGigabit binary_fiberNonGigabit binary_cable if e(sample)
 
 
 /* TABLE: aDSL Service, Competition Presence Specifications */
 // Export results of all aDSL regressions in RTF and Tex formats
-esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.rtf, title("Table: aDSL Service, Competition Presence Dummies") keep(binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2018 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) append
+esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.rtf, title("Table: aDSL Service, Competition Presence Dummies") keep(binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2019 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) append
 
-esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.tex, title("Table: aDSL Service, Competition Presence Dummies") keep(binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2018 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) append
+esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.tex, title("Table: aDSL Service, Competition Presence Dummies") keep(binary_fiberGigabit binary_fiberNonGigabit binary_cable ln_medianincome_tract_2019 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) append
 
 eststo clear
 
@@ -344,59 +344,59 @@ eststo clear
 
 /* HOUSING DENSITY */
 // Simple OLS (est1)
-eststo: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2018 ln_housing_density if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2019 ln_housing_density if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "No", replace
 
 // State Fixed Effects (est2)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2018 ln_housing_density i.stateabbr if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2019 ln_housing_density i.stateabbr if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "No", replace
 
 // Time Fixed Effects (est3)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2018 ln_housing_density i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2019 ln_housing_density i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "Yes", replace
 
 // State & Time Fixed Effects (est4)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2018 ln_housing_density i.stateabbr i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2019 ln_housing_density i.stateabbr i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "Yes", replace
 
-summarize ln_maxaddown_kbps ln_medianincome_tract_2018 ln_housing_density if e(sample)
+summarize ln_maxaddown_kbps ln_medianincome_tract_2019 ln_housing_density if e(sample)
 
 
 /* POPULATION DENSITY */
 // Simple OLS (est5)
-eststo: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2018 ln_popln_density if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2019 ln_popln_density if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "No", replace
 
 // State Fixed Effects (est6)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2018 ln_popln_density i.stateabbr if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2019 ln_popln_density i.stateabbr if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "No", replace
 
 // Time Fixed Effects (est7)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2018 ln_popln_density i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2019 ln_popln_density i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "No", replace
 estadd local time_fe "Yes", replace
 
 // State & Time Fixed Effects (est8)
-eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2018 ln_popln_density i.stateabbr i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
+eststo: xi: reg ln_maxaddown_kbps binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2019 ln_popln_density i.stateabbr i.month if inlist(techcode, 40, 41, 42, 43), robust cluster(tractid)
 estadd local state_fe "Yes", replace
 estadd local time_fe "Yes", replace
 
-summarize ln_maxaddown_kbps ln_medianincome_tract_2018 ln_popln_density if e(sample)
+summarize ln_maxaddown_kbps ln_medianincome_tract_2019 ln_popln_density if e(sample)
 
 tab1 binary_fiberGigabit binary_fiberNonGigabit binary_aDSL if e(sample)
 
 
 /* TABLE: Cable Service, Competition Presence Specifications */
 // Export results of all aDSL regressions in RTF and Tex formats
-esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.rtf, title("Table: Cable Service, Competition Presence Dummies") keep(binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2018 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) append
+esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.rtf, title("Table: Cable Service, Competition Presence Dummies") keep(binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2019 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) append
 
-esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.tex, title("Table: Cable Service, Competition Presence Dummies") keep(binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2018 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) append
+esttab est1 est5 est2 est6 est3 est7 est4 est8 using regression-tables.tex, title("Table: Cable Service, Competition Presence Dummies") keep(binary_fiberGigabit binary_fiberNonGigabit binary_aDSL ln_medianincome_tract_2019 ln_housing_density ln_popln_density _cons) label s(state_fe time_fe N, label("State Fixed Effects" "Time Fixed Effects" "N")) append
 
 eststo clear
 
