@@ -34,7 +34,7 @@ If you have insufficient RAM to work with the full national panel, you can selec
 
 By default, `scripts/append-random.do` will sample 25 percent of U.S. census tracts. Edit line 36 of `scripts/append-random.do` to change the sample size. 
 
-You can define the seed to allow for replication of a sample on line 35 of `scripts/append-random.do`. The seed is set to `5663451`.
+You can define the seed to allow for replication of a sample on line 35 of `scripts/append-random.do`. The seed is set to `5663451`. You can [download a dataset](https://form477-panels.s3.us-east-2.amazonaws.com/US-Fixed-Panel-Random-Merged-1.1.x.dta) (~10 GB) that uses this seed to draw a sample of 25 percent of U.S. census tracts from Dec. 2014 to Dec. 2019.
 
 ## Final Outputs
 When the full `master.do` script is executed, four files will be placed in your working directory.
