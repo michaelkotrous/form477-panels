@@ -116,7 +116,7 @@ use crosssection/US-Fixed-Merged-201912, clear
 merge m:1 tractid using `tracts_fullControls', generate(_merge_sampleTracts)
 keep if _merge_sampleTracts == 3
 
-/* APPEND CROSS-SECTION SAMPLES TO DEC 2018 TO MAKE FULL PANEL */
+/* APPEND CROSS-SECTION SAMPLES TO DEC 2019 TO MAKE FULL PANEL */
 append using `sample_201412' `sample_201506' `sample_201512' `sample_201606' `sample_201612' `sample_201706' `sample_201712' `sample_201806' `sample_201812' `sample_201906'
 
 log close

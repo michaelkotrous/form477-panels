@@ -1,5 +1,25 @@
 # CHANGELOG
-## Second Draft, Submitted Nov. 24, 2020
+## _Journal of Information Policy_
+### Second Draft, Submitted Mar. 19, 2021, Accepted on Jul. 27, 2021
+- Expand the panel of FCC Form 477 data to include **all Census blocks** in the 48 contiguous states and Washington, DC.
+- Extend the panel to include Form 477 data from June 2019 and December 2019. Controls sourced from 2019 ACS also added.
+- Modified OLS estimators to include all competition count binaries, rather than using a “three or more” binary. 
+	- For cable specifications, the competition count binaries are as follows:
+		- Gigabit fiber: 1, 2, 3, 4
+		- Non-gigabit fiber: 1, 2, 3, 4, 5
+		- Cable: 2, 3, 4, 5
+		- aDSL: 1, 2, 3, 4
+	- For our aDSL download speed specifications, the competition count binaries are as follows:
+		- Gigabit fiber: 1, 2, 3, 4
+		- Non-gigabit fiber: 1, 2, 3, 4, 5
+		- Cable: 1, 2, 3, 4, 5
+		- aDSL: 2, 3, 4
+
+### First Draft, Submitted Nov. 29, 2020
+We submitted version identical to the second draft of the Center for Growth and Opportunity working paper for review.
+
+## Center for Growth and Opportunity Working Paper
+### Second Draft, Submitted Nov. 24, 2020
 - Cluster standard errors by Census tract 
 	- add `cluster(tractid)` after each `, robust` in `broadbandcompetition-panel.do`
 - Filter data to exclude reported broadband service that does not meet current FCC definition of broadband
@@ -23,7 +43,7 @@
 	- The shapefiles are available for the block groups for each state for each year in our panel. This allows us to calculate population density and housing density for each year according to the exact geographies for the year's in which they were estimated, rather than assuming that the 2010 Decennial Census closely approximated the geographies for the ACS. After reviewing a handful of states, year-to-year changes in the land area's reported in the TIGER/Line Shapefiles are actual common.
 	- Census discontinued American FactFinder website and the geography summary tables from which 2010 landareas. Accordingly, the landarea measures we use to calculate population density and housing density at the block group level could not be readily replicated without this update.
 
-## First Draft, Submitted Aug 28, 2019
+### First Draft, Submitted Aug. 28, 2019
 - Compile FCC Form 477 data from Dec 2014 through Dec 2017
 - Merge ACS and Census controls
 - Sample 20 percent of all US tracts due to computational limitations

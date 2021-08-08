@@ -56,4 +56,8 @@ Collecting the data took considerable effort, and storing the source files and a
 
 I would love to hear from you if you publish any research that uses or was inspired by this repository! If you do so, please cite this repository and:
 
+Kotrous, Michael, and James Bailey. "Broadband Speeds in Fibered US Markets: An Empirical Analysis." Forthcoming. _Journal of Information Policy_.
+
+A [previous release](https://github.com/michaelkotrous/form477-panels/tree/v.1.0.1) of this repository can be used to replicate the dataset and results in the working paper version of this article, which can be cited as follows:
+
 Kotrous, Michael, and James Bailey. "Broadband Speeds in Fibered Markets: An Empirical Analysis." Working Paper, The Center for Growth and Opportunity at Utah State University, January 2021. [https://www.thecgo.org/research/broadband-speeds-in-fibered-markets-an-empirical-analysis/](https://www.thecgo.org/research/broadband-speeds-in-fibered-markets-an-empirical-analysis/).
