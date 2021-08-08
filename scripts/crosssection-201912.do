@@ -1,16 +1,16 @@
-/* Produce June 2018 dataset with
-** - ACS, block group landarea merged into June 2018 FCC Form 477 dataset,
+/* Produce December 2019 dataset with
+** - ACS, block group landarea merged into December 2019 FCC Form 477 dataset,
 ** - Housing and Population Density values, and
 ** - Competition metrics 
 **
 ** Outputs:
-** - crosssection/US-Fixed-Merged-201806.dta
-** - crosssection/merge-source-201806.log
-** - crosssection/merge-competition-vars-201806.log */
+** - crosssection/US-Fixed-Merged-201912.dta
+** - crosssection/merge-source-201912.log
+** - crosssection/merge-competition-vars-201912.log */
 
-global year 2018
-global yearabbr 18
-global yyyymm 201806
+global year 2019
+global yearabbr 19
+global yyyymm 201912
 
 /* -------------------
  ** ACS B01003
@@ -64,8 +64,8 @@ clear
  ** FCC FORM 477
  * ------------------- */
 
-/* JUNE 2018 */
-import delimited source/2018/fcc477/US-FIXED-JUN2018-v1, clear
+/* DECEMBER 2019 */
+import delimited source/2019/fcc477/US-FIXED-DEC2019-v1, clear
 
 // Drop states and territories outside 48 contiguous US states and DC
 drop if stateabbr == "AK" | stateabbr == "AS" | stateabbr == "GU" | stateabbr == "HI" | stateabbr == "MP" | stateabbr == "PR" | stateabbr == "VI"
@@ -77,11 +77,13 @@ keep if consumer == 1
 drop if maxaddown < 25 | maxadup < 3
 
 // Drop columns not needed for analysis
-drop dbaname holdingcompanyname hoconum hocofinal business maxcirdown maxcirup
+// Note: Dec 2019 v. 1 release does not include maxcirup or maxcirdown columns
+//       like previous releases, but business speeds are not considered in this analysis
+drop dbaname holdingcompanyname hoconum hocofinal business
 
 // Generate dates for panel
-generate month = date("06/30/2018", "MDY")
-generate year = date("2018", "Y")
+generate month = date("12/31/2019", "MDY")
+generate year = date("2019", "Y")
 
 // Clean formats to make variables consistent across 477 data files
 format maxaddown %9.0g
@@ -108,7 +110,7 @@ generate stateid = substr(blockid, 1, 2)
 
 
 /* -------------------
- ** PRODUCE FULL JUN 2018 FCC, ACS DATA 
+ ** PRODUCE FULL DEC 2019 FCC, ACS DATA 
  * ------------------- */
 
 /* MERGE ACS, BLOCK GROUP LANDAREA INTO FCC FORM 477 DATA */

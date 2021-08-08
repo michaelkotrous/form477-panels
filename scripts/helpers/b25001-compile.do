@@ -9,7 +9,7 @@ foreach state of global states {
 	format year %ty
 
 	// Format data
-	if $year == 2018 {
+	if $year == 2018 | $year == 2019 {
 		// Generate FIPS code for block groups
 		gen blkgrpid = substr(geo_id, 10, 12)
 		

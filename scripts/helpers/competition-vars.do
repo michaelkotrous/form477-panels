@@ -69,28 +69,40 @@ replace binary_aDSL1 = 1 if count_aDSL == 1
 gen binary_aDSL2 = 0
 replace binary_aDSL2 = 1 if count_aDSL == 2
 gen binary_aDSL3 = 0
-replace binary_aDSL3 = 1 if count_aDSL >= 3
+replace binary_aDSL3 = 1 if count_aDSL == 3
+gen binary_aDSL4 = 0
+replace binary_aDSL4 = 1 if count_aDSL == 4
 
 gen binary_cable1 = 0
 replace binary_cable1 = 1 if count_cable == 1
 gen binary_cable2 = 0
 replace binary_cable2 = 1 if count_cable == 2
 gen binary_cable3 = 0
-replace binary_cable3 = 1 if count_cable >= 3
+replace binary_cable3 = 1 if count_cable == 3
+gen binary_cable4 = 0
+replace binary_cable4 = 1 if count_cable == 4
+gen binary_cable5 = 0
+replace binary_cable5 = 1 if count_cable == 5
 
 gen binary_fiberGigabit1 = 0
 replace binary_fiberGigabit1 = 1 if count_fiberGigabit == 1
 gen binary_fiberGigabit2 = 0
 replace binary_fiberGigabit2 = 1 if count_fiberGigabit == 2
 gen binary_fiberGigabit3 = 0
-replace binary_fiberGigabit3 = 1 if count_fiberGigabit >= 3
+replace binary_fiberGigabit3 = 1 if count_fiberGigabit == 3
+gen binary_fiberGigabit4 = 0
+replace binary_fiberGigabit4 = 1 if count_fiberGigabit == 4
 
 gen binary_fiberNonGigabit1 = 0
 replace binary_fiberNonGigabit1 = 1 if count_fiberNonGigabit == 1
 gen binary_fiberNonGigabit2 = 0
 replace binary_fiberNonGigabit2 = 1 if count_fiberNonGigabit == 2
 gen binary_fiberNonGigabit3 = 0
-replace binary_fiberNonGigabit3 = 1 if count_fiberNonGigabit >= 3
+replace binary_fiberNonGigabit3 = 1 if count_fiberNonGigabit == 3
+gen binary_fiberNonGigabit4 = 0
+replace binary_fiberNonGigabit4 = 1 if count_fiberNonGigabit == 4
+gen binary_fiberNonGigabit5 = 0
+replace binary_fiberNonGigabit5 = 1 if count_fiberNonGigabit == 5
 
 // Produce binary indicating presence of any provider of given technology 
 gen binary_aDSL = 0

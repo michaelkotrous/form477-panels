@@ -7,7 +7,7 @@
 
 /* RANDOMLY SELECT ONE-FOURTH OF CLEAN TRACTS */
 // Identify tracts with ACS control variables that failed to merge (population, housing, or income) with 477 cross-sections
-// Note: Tracts that failed to merge with 477 data were identical in 2015, 2016, 2017, and 2018. All tracts that failed to merge in 2014 also failed in the other years, but three tracts that failed to merge in later years succeeded in 2014. 
+// Note: Tracts that failed to merge with 477 data were identical in 2015, 2016, 2017, 2018, and 2019. All tracts that failed to merge in 2014 also failed in the other years, but three tracts that failed to merge in later years succeeded in 2014. 
 tempfile tracts_missingControls
 use crosssection/US-Fixed-Merged-201812, clear
 collapse (count) logrecno if _merge_population == 1 | _merge_housingunits == 1 | _merge_medianincome == 1, by(tractid)
@@ -98,13 +98,26 @@ keep if _merge_sampleTracts == 3
 save `sample_201806'
 
 // Dec 2018
+tempfile sample_201812
 use crosssection/US-Fixed-Merged-201812, clear
 merge m:1 tractid using `tracts_fullControls', generate(_merge_sampleTracts)
 keep if _merge_sampleTracts == 3
+save `sample_201812'
 
+// Jun 2019
+tempfile sample_201906
+use crosssection/US-Fixed-Merged-201906, clear
+merge m:1 tractid using `tracts_fullControls', generate(_merge_sampleTracts)
+keep if _merge_sampleTracts == 3
+save `sample_201906'
 
-/* APPEND CROSS-SECTION SAMPLES TO DEC 2018 TO MAKE FULL PANEL */
-append using `sample_201412' `sample_201506' `sample_201512' `sample_201606' `sample_201612' `sample_201706' `sample_201712' `sample_201806'
+// Dec 2019
+use crosssection/US-Fixed-Merged-201912, clear
+merge m:1 tractid using `tracts_fullControls', generate(_merge_sampleTracts)
+keep if _merge_sampleTracts == 3
+
+/* APPEND CROSS-SECTION SAMPLES TO DEC 2019 TO MAKE FULL PANEL */
+append using `sample_201412' `sample_201506' `sample_201512' `sample_201606' `sample_201612' `sample_201706' `sample_201712' `sample_201806' `sample_201812' `sample_201906'
 
 log close
 
@@ -115,6 +128,10 @@ drop _merge_population _merge_housingunits _merge_landarea _merge_medianincome _
 
 /* FORMAT DATASET BY SORTING, ORDERING, AND LABELING */
 do scripts/helpers/dataset-formatting
+
+
+/* DESCRIBE DATASET */
+label data "FCC Form 477 Fixed Broadband Data, 2014-2019 from 25 percent of US Census Tracts"
 
 save US-Fixed-Panel-Random-Merged, replace
 clear
