@@ -47,7 +47,7 @@ When the full `master.do` script is executed, four files will be placed in your 
 You will also notice that the `crosssection` directory is populated with Stata dta files for each merged cross-section of Form 477/ACS data, as well as various Stata log files with merger summaries and the like.
 
 ## Replicating Research
-The [1.1.0 release](https://github.com/michaelkotrous/form477-panels/tree/v.1.1.0) of this repository can be used to replicate the dataset and econometric results of a forthcoming article by Kotrous and Bailey in the _Journal of Information Policy_.
+The [1.1.1 release](https://github.com/michaelkotrous/form477-panels/tree/v.1.1.1) of this repository can be used to replicate the dataset and econometric results of [Kotrous and Bailey (2021)](https://doi.org/10.5325/jinfopoli.11.2021.0478) in the _Journal of Information Policy_.
 
 The [1.0.1 release](https://github.com/michaelkotrous/form477-panels/tree/v.1.0.1) can be used to replicate [Kotrous and Bailey (2021)](https://www.thecgo.org/research/broadband-speeds-in-fibered-markets-an-empirical-analysis/), a working paper released by the Center for Growth and Opportunity in Jan. 2021. That working paper analyzes a panel for 2014 - 2018 that samples 25 percent of U.S. Census tracts at random. The seed for replicating that sample is `5663451`. To draw a different sample of tracts, edit the seed on line 35 of `scripts/append-random.do`.
 
@@ -56,7 +56,7 @@ Collecting the data took considerable effort, and storing the source files and a
 
 I would love to hear from you if you publish any research that uses or was inspired by this repository! If you do so, please cite this repository and:
 
-Kotrous, Michael, and James Bailey. "Broadband Speeds in Fibered US Markets: An Empirical Analysis." Forthcoming. _Journal of Information Policy_.
+Kotrous, Michael, and James Bailey. "Broadband Speeds in Fibered US Markets: An Empirical Analysis." 2021. _Journal of Information Policy_ 11(2021): 478-522. [https://doi.org/10.5325/jinfopoli.11.2021.0478](https://doi.org/10.5325/jinfopoli.11.2021.0478).
 
 A [previous release](https://github.com/michaelkotrous/form477-panels/tree/v.1.0.1) of this repository can be used to replicate the dataset and results in the working paper version of this article, which can be cited as follows:
 
