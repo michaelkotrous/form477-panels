@@ -20,9 +20,9 @@ In the repo working directory, create two new directories: crosssection (note th
 
 **crosssection**: This directory is used to store each of the nine cross-sections of Form 477 data that has been joined with Census data. You are okay to leave this directory empty. It will be populated with files as the Stata scripts execute.
 
-**source**: This directory is used to store all source files (in csv format) from FCC, the U.S. Census Bureau, and U.S. Bureau of Labor Statistics. This directory must be populated with source files in order to work. You can download an archive ([.zip](https://form477-panels.s3.us-east-2.amazonaws.com/form477-panels-1.1.x.zip); [.tar.gz](https://form477-panels.s3.us-east-2.amazonaws.com/form477-panels-1.1.x.tar.gz)) of the source files. These files require just under 50 GB of storage. Note that when you extract the source files, the directory structure in your local environment (relative to the repo working directory) should look like `source/2014`, `source/2015`, and so on.
+**source**: This directory is used to store all source files (in csv format) from FCC, the U.S. Census Bureau, and U.S. Bureau of Labor Statistics. This directory must be populated with source files in order to work. Contact me on [Twitter](https://twitter.com/MichaelKotrous) or my [personal website](https://michaelkotro.us) to request these files. These files require just under 50 GB of storage. Note that when you extract the source files, the directory structure in your local environment (relative to the repo working directory) should look like `source/2014`, `source/2015`, and so on.
 
-If you wish to see the final dataset or use it to run econometric tests, you can [download the final dataset](https://form477-panels.s3.us-east-2.amazonaws.com/US-Fixed-Panel-Merged-1.1.x.dta) (~40 GB). This dataset includes observations for all U.S. Census tracts in the 48 contiguous states and Washington, D.C.
+If you wish to see the final dataset or use it to run econometric tests, you can request the final dataset by messaging me on [Twitter](https://twitter.com/MichaelKotrous) or contacting me on my [personal website](https://michaelkotro.us). This dataset includes observations for all U.S. Census tracts in the 48 contiguous states and Washington, D.C.
 
 ## Using the Scripts
 Executing the scripts is quite simple. Simply open `master.do` in Stata, define the working directory on line 7, and execute the do file. There's no need to edit or modify the do files in the scripts directory. The master do file will execute the supporting scripts in the appropriate order. 
@@ -34,7 +34,7 @@ If you have insufficient RAM to work with the full national panel, you can selec
 
 By default, `scripts/append-random.do` will sample 25 percent of U.S. census tracts. Edit line 36 of `scripts/append-random.do` to change the sample size. 
 
-You can define the seed to allow for replication of a sample on line 35 of `scripts/append-random.do`. The seed is set to `5663451`. You can [download a dataset](https://form477-panels.s3.us-east-2.amazonaws.com/US-Fixed-Panel-Random-Merged-1.1.x.dta) (~10 GB) that uses this seed to draw a sample of 25 percent of U.S. census tracts from Dec. 2014 to Dec. 2019.
+You can define the seed to allow for replication of a sample on line 35 of `scripts/append-random.do`. The seed is set to `5663451`. You can request a dataset (~10 GB) that uses this seed to draw a sample of 25 percent of U.S. census tracts from Dec. 2014 to Dec. 2019. Please contact me on [Twitter](https://twitter.com/MichaelKotrous) or my [personal website](https://michaelkotro.us) for that file.
 
 ## Final Outputs
 When the full `master.do` script is executed, four files will be placed in your working directory.
