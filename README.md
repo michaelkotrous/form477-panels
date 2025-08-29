@@ -13,16 +13,16 @@ This project uses the MIT License, so you are free to copy and modify the code a
 ## Dependencies
 The code was most recently executed in Stata 16.1. Earlier versions of this code could be executed in Stata 14, so I expect this code will be compatible with most flavors of Stata.
 
-The do file for econometric tests, `broadbandcompetition-panel.do`, uses the [estout](http://repec.sowi.unibe.ch/stata/estout/) package to export regression tables in RTF/Word and LaTeX formats. I strongly recommend installing it for this and other Stata projects!
+The do file for econometric tests, `broadbandcompetition-panel.do`, uses the [estout](https://repec.sowi.unibe.ch/stata/estout/) package to export regression tables in RTF/Word and LaTeX formats. I strongly recommend installing it for this and other Stata projects!
 
 ## Setting up your Environment
 In the repo working directory, create two new directories: crosssection (note three s's) and source.
 
 **crosssection**: This directory is used to store each of the nine cross-sections of Form 477 data that has been joined with Census data. You are okay to leave this directory empty. It will be populated with files as the Stata scripts execute.
 
-**source**: This directory is used to store all source files (in csv format) from FCC, the U.S. Census Bureau, and U.S. Bureau of Labor Statistics. This directory must be populated with source files in order to work. Contact me on [Twitter](https://twitter.com/MichaelKotrous) or my [personal website](https://michaelkotro.us) to request these files. These files require just under 50 GB of storage. Note that when you extract the source files, the directory structure in your local environment (relative to the repo working directory) should look like `source/2014`, `source/2015`, and so on.
+**source**: This directory is used to store all source files (in csv format) from FCC, the U.S. Census Bureau, and U.S. Bureau of Labor Statistics. This directory must be populated with source files in order to work. Contact me on [X](https://x.com/MichaelKotrous) or my [personal website](https://www.michaelkotrous.com) to request these files. These files require just under 50 GB of storage. Note that when you extract the source files, the directory structure in your local environment (relative to the repo working directory) should look like `source/2014`, `source/2015`, and so on.
 
-If you wish to see the final dataset or use it to run econometric tests, you can request the final dataset by messaging me on [Twitter](https://twitter.com/MichaelKotrous) or contacting me on my [personal website](https://michaelkotro.us). This dataset includes observations for all U.S. Census tracts in the 48 contiguous states and Washington, D.C.
+If you wish to see the final dataset or use it to run econometric tests, you can request the final dataset by messaging me on [X](https://x.com/MichaelKotrous) or contacting me on my [personal website](https://www.michaelkotrous.com). This dataset includes observations for all U.S. Census tracts in the 48 contiguous states and Washington, D.C.
 
 ## Using the Scripts
 Executing the scripts is quite simple. Simply open `master.do` in Stata, define the working directory on line 7, and execute the do file. There's no need to edit or modify the do files in the scripts directory. The master do file will execute the supporting scripts in the appropriate order. 
@@ -34,7 +34,7 @@ If you have insufficient RAM to work with the full national panel, you can selec
 
 By default, `scripts/append-random.do` will sample 25 percent of U.S. census tracts. Edit line 36 of `scripts/append-random.do` to change the sample size. 
 
-You can define the seed to allow for replication of a sample on line 35 of `scripts/append-random.do`. The seed is set to `5663451`. You can request a dataset (~10 GB) that uses this seed to draw a sample of 25 percent of U.S. census tracts from Dec. 2014 to Dec. 2019. Please contact me on [Twitter](https://twitter.com/MichaelKotrous) or my [personal website](https://michaelkotro.us) for that file.
+You can define the seed to allow for replication of a sample on line 35 of `scripts/append-random.do`. The seed is set to `5663451`. You can request a dataset (~10 GB) that uses this seed to draw a sample of 25 percent of U.S. census tracts from Dec. 2014 to Dec. 2019. Please contact me on [X](https://x.com/MichaelKotrous) or my [personal website](https://www.michaelkotrous.com) for that file.
 
 ## Final Outputs
 When the full `master.do` script is executed, four files will be placed in your working directory.
